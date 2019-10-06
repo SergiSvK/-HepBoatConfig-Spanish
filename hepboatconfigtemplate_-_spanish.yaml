@@ -1,0 +1,380 @@
+# En ella no aparecen todos los plugins para acortarla, pero es totalemte personalizable.
+# Los campos que contengan la ID "000000000000000000" tienen que ser cambiados por las IDs correspondientes.
+# Aqui se ponen los usuarios con acceso a la Dashboard. Recuerda que la ID del dueño del servidor debe estar presente.
+# Los usuarios pueden tener los permisos de:
+#   admin - editar la configuracion y agregar a mas admins.
+#   editor - editar la configuracion.
+#   viewer - ver la configuracion, sin poder editarla.
+
+# Todas las partes de la configuracion pueden ser editadas, eliminadas o cambiadas.
+web: 
+  280334313667559425: admin # Tu ID
+  459649180969730050: editor # Esta es la ID de @mariiete1801#1801. Puedes quitarla o no, pero puede ser util para que pueda revisar tu configuracion si da errores.
+  192993907968180225: editor
+
+nickname: HepSvK # Selecciona el apodo que tendra HepBoat en tu servidor.
+
+levels:
+  459649180969730050: 200 # Mariiete 1801 # Puedes quitar esto o dejarlo, si necesitas ayuda mejor dejarlo.
+  568757007423766528: 200 # Mariiete
+  280334313667559425: 200 # Tu ID
+  304026018950152193: 100 # Admin
+  335066561889173505: 100 # Bots
+  519253759721734185: 100 # Soporte
+  334368554549903367: 80  # Moderadores
+  440451631600107520: 70  # Ayudantes
+  432291057594793994: 16 # invitado
+  383988292259020801: 10  # Mestizo
+  383983789212172288: 10  # Rebelion
+  381419033498746882: 8   # Compitrueno
+  391542393087721483: 1   # Nova1
+
+commands: # Aqui se configuran los premisos para los comandos y el prefix.
+  prefix: "!!"
+
+  # Aqui cambias los permisos para los comandos, grupos o plugins. Los rangos para cada comando vienen especificados en la documentacion.
+  # Por defecto, equivalen a estos niveles:
+    # default - 0
+    # trusted - 10
+    # # comandos 'clean' y 'mute' - 40
+    # moderator - 50
+    # administrator - 100
+  overrides: 
+    - plugin.name: tags
+      out:
+        level: 100
+    - name: tags-usr
+      out:
+        level: 10
+    - name: tempmute
+      out:
+        level: 40
+    - group: role
+      out:
+        level: 100
+    - group: r
+      out:
+        level: 10
+  lockdown: # Permite usar el comando / grupo / plugin en canales concretos.
+    - name: rank
+      out:
+        channels:
+          - 000000000000000000 # Canal
+          - 000000000000000000 # Canal
+    - name: level
+      out:
+        channels:
+          - 000000000000000000 # Canal
+          - 000000000000000000 # Canal
+    - name: top
+      out:
+        channels:
+          - 000000000000000000 # Canal
+        category:
+          - 000000000000000000 # Categoría
+  dm_denied: true # true = manda un MD al usuario diciendo que no puede usar el comando / false = no lo manda
+  local_blacklist: # Los usuario en esta lista no podran usar el bot
+    - 000000000000000000 # ID de usuario
+    - 000000000000000000 # ID de usuario
+
+plugins:
+
+  admin:
+    persist:
+      roles: true
+      role_ids:
+        - 431863675620556810 # ID del rol para los mutes
+      nickname: true
+      voice: true
+    locked_roles: []
+    tracking: []
+    allow_say: true
+    welcomes:
+      000000000000000000:
+        msg: |-
+          :tickets: Entrada al servidor
+          
+          Hola {user}, bienvenido/a a **Team SvK :fire:**. 
+          Una comunidad Semi-Privada de habla hispana, de ocio alternativo y digital. Dedicada al bien estar de nuestros jugadores y streamers.
+          
+          **¡Nos alegra que hayas decido unirte a nuestra comunidad!**
+          
+          _Info._ {c544192250456965182}
+          
+        # Cambia 000000000000000000 por la ID del canal de reglas, informacion, etc.
+        dm: true
+    confirm_actions: true
+  
+  censor:
+    levels:
+      50: # Nivel a partir del cual no afecta el plugin. Aquí a fecta a todos los usuarios con menos de nivel 50.
+        filter_zalgo: true 
+        filter_invites: true 
+        invites_guild_whitelist:
+          - 301997437156065281 # ID del servidor del que SI se puede mandar invitacion.
+        invites_blackist: []
+        filter_domains: true 
+        domains_whitelist: []
+        domains_blacklist: []
+        blocked_tokens: # Token = palabra en cualquier sitio del mensaje
+          - 'fuck'
+          - 'fvck'
+          - 'fuk'
+          - 'fvk'
+          - 'nigga'
+          - 'dick'
+          - 'porn'
+          - 'p0rn'
+          - 'nibba'
+          - 'puto'
+          - 'puta'
+          - 'perra'
+          - 'gilipollas'
+          - 'anormal'
+          - 'subnormal'
+          - 'pvta'
+          - 'pvto'
+          - 'fack'
+        blocked_words: # Word = palabra separada por un espacio a cada lado
+          - 'Copy and paste this to all of the servers you are in'
+          - 'Our team is currently working very hard to remove this user from our database,'
+          - 'este es un mensaje del creador de la discordia y te cuenta un poco sobre lo que sucederá en la discordia el 23 de julio.'
+          - 'Estimados miembros de la discordia, se supone que la discordia se cerrará el 7 de noviembre de 2020 porque se ha vuelto demasiado poblada.'
+          - 'indica que hay muchos miembros activos de la discordia pero también muchos miembros nuevos.'
+        blocked_mentions: # Menciones bloqueadas
+          - u000000000000000000 # ID de un usuario
+          - r000000000000000000 # ID de un rol
+          - c000000000000000000 # ID de un canal
+        blocked_nicknames:
+          - hiter
+          - nazi
+        filter_all_caps: true # Censurar las mayusculas.
+        all_caps_min_char_length: 10
+        all_caps_min:message_count: 3
+        all_caps_interval: 5
+        message_char_limit: 0 # Cantidad maxima de caracteres por mensaje. 0 = desactivado
+        zalgo_channel_whitelist: [] # Canales donde el zalgo no se censura.
+        invites_channel_whitelist: [] # Canales donde las inivitaciones no se censuran.
+        domains_channel_whitelist:   # Canales donde los enlaces no se censuran.
+         - 624916694359343106 # Canal Series
+         - 624919664233021450 # Canal Musica
+         - 624920768664436736 # Canal Puntua
+         - 334393705668673536 # Canal Memesversos
+         - 391249521193254912 # Canal Comandos
+        words_channel_whitelist: [] # Canales donde las palabras no se censuran.
+        char_limit_channel_whitelist: [] # Canales donde el limite de palabras no censura.
+        mention_channel_whitelist: [] # Canales donde las menciones no censuran.
+        all_caps_channel_whitelist: [] # Canales donde las menciones no censuran.
+        mute_violations: true # Mutear a un usuario segun la configuracion de abajo
+        mute_violations_count: 5
+        mute_violations_interval: 10
+        mute_violations_duration: 500
+        antiraid:
+          key_duration: 300
+          interval: 30
+          count: 3
+          lockdown_duration: 300
+          raidrole: 624960861961977896 # Rol para raiders
+          notifyrole: 334368554549903367 # Rol de notificacion para el staff
+    
+  infractions:
+    confirm_actions: true
+    mute_role: 431863675620556810 # Rol de muteado
+    reason_edit_level: 70 
+    vc_mute: true 
+    vc_mute_channel: 301997564553854977 # ID del canal de voz definido como AFK
+    confirm_actions_expiry: 0
+    notify:
+      WARN:
+        emoji: rotating_light
+        format: |-
+          {action!s}
+          Has sido **{action!s}**
+          **Servidor**: {guild.name}
+          **Moderador**: {actor!s}
+          **Razon**: {reason!s}
+      TEMPMUTE:
+        emoji: no_mouth
+        format: |-
+          {action!s}
+          Has sido **{action!s}**
+          **Servidor**: {guild.name}
+          **Moderador**: {actor!s}
+          **Expira**: {expires} GMT+0
+          **Razon**: {reason!s}      
+      MUTE:
+        emoji: no_mouth
+        format: |-
+          {action!s}
+          Has sido **{action!s}**
+          **Servidor**: {guild.name}
+          **Moderador**: {actor!s}
+          **Expira**: {expires} GMT+0
+          **Razon**: {reason!s}    
+      TEMPBAN:
+        emoji: tools
+        format: |-
+          {action!s}
+          Has sido **{action!s}**
+          **Servidor**: {guild.name}
+          **Moderador**: {actor!s}
+          **Expira**: {expires} GMT+0
+          **Razon**: {reason!s}    
+      BAN:
+        emoji: tools
+        format: |-
+          {action!s}
+          Has sido **{action!s}** 
+          **Servidor**: {guild.name}
+          **Moderador**: {actor!s}
+          **Expira**: {expires} GMT+0
+          **Razon**: {reason!s}  
+          
+
+  # Aquí van los registros del servidor. Si no quieres/necesitas alguno puedes quitarlo.
+  modlog:
+    channels:
+      590509353082290176: # Todos los logs
+        exclude: []
+        include: []
+        timestamps: true
+        compact: true
+        timezone: Europe/Madrid
+      576031205905137670: # Spam 
+        exclude: []
+        include: 
+          - CENSORED
+          - SPAM_DEBUG
+        timestamps: true
+        compact: true
+        timezone: Europe/Madrid
+      576031111134576650: # Sanciones
+        exclude: []
+        include: 
+          - MEMBER_TEMP_MUTED
+          - MEMBER_MUTED
+          - MEMBER_UNMUTED
+          - MEMBER_KICK
+          - MEMBER_BAN
+          - MEMBER_SOFTBAN
+          - MEMBER_TEMPBAN
+          - MEMBER_WARNED
+          - GUILD_BAN_ADD
+        timestamps: true
+        compact: true
+        timezone: Europe/Madrid
+      576031084567855104: # Usuarios
+        exclude: []
+        include: 
+          - GUILD_MEMBER_ADD
+          - GUILD_MEMBER_REMOVE
+          - GUILD_MEMBER_ROLES_ADD
+          - GUILD_MEMBER_ROLES_RMV
+          - MEMBER_RESTORE
+          - ADD_NICK
+          - RMV_NICK
+          - CHANGE_NICK
+          - CHANGE_USERNAME
+          - COMMAND_USED
+          - MEMBER_ROLE_ADD
+          - MEMBER_ROLE_REMOVE
+        timestamps: true
+        compact: true
+        timezone: Europe/Madrid
+      576031062497558528: # Mensajes
+        exclude: []
+        include: 
+          - MESSAGE_EDIT
+          - MESSAGE_DELETE
+          - MESSAGE_DELETE_BULK
+        timestamps: true
+        compact: true
+        timezone: Europe/Madrid
+      576031157808922629: # Voz
+        exclude: []
+        include: 
+          - VOICE_CHANNEL_JOIN
+          - VOICE_CHANNEL_LEAVE
+          - VOICE_CHANNEL_MOVE
+        timestamps: true
+        compact: true
+        timezone: Europe/Madrid
+      576031171272769576: # Server
+        exclude: []
+        include: 
+          - CHANNEL_CREATE
+          - CHANNEL_DELETE
+          - UILD_ROLE_CREATE
+          - GUILD_ROLE_DELETE
+          - SLOWMODE_ON
+          - SLOWMODE_OFF
+        timestamps: true
+        compact: true
+        timezone: Europe/Madrid
+    ignored_users: []
+    ignored_channels: []
+    new_member_threshold: 0
+
+  spam:
+    levels:
+      50: # Nivel a partir del cual no afecta el plugin. Aquí a fecta a todos los usuarios con menos de nivel 50.
+        punissment: TEMPMUTE
+        punishment_duration: 300
+        clean: true # Borrar los mensajes del usuario o no.
+        clean_count: 50
+        clean_duration: 100
+        channel_whitelist: [] # Canales en los que el plugin no afecta.
+        max_messages:
+          count: 5
+          interval: 2
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+        max_mentions:
+          count: 3
+          interval: 5
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+        max_links:
+          count: 10
+          interval: 15
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+        max_upper_case:
+          count: 20
+          interval: 30
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+        max_newlines:
+          count: 60
+          interval: 60
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+        max_emojis:
+          count: 10
+          interval: 5
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+        max_attachments:
+          count: 10
+          interval: 15
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+        max_duplicates:
+          count: 3
+          interval: 15
+          channel_whitelist: [] # Canales en los que la opcion no afecta.
+
+  starboard:
+    channels:
+      576031609128484904:
+        clean_on_delete: false 
+        min_stars: 2
+        star_color_max: 15
+        prevent_self_star: false 
+        ignored_channels: [] # Canales donde no funcionara el starboard
+        sources:  # Canales donde solo funcionara el starboard
+        - 624919664233021450
+        - 624920768664436736
+        - 624919664233021450
+        - 334393705668673536
+        - 355767515646787596
+        - 301997437156065281
+
+  tags:
+    max_tag_length: 1500
+    min_level_remove_others: 100
+
+  utilities: {}
